@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
@@ -49,7 +48,7 @@ class ExpenseBucket {
             .where((expense) => expense.categoty == category)
             .toList();
 
-  final Category category;
+  final Categoty category;
   final List<Expense> expenses;
 
   double get totalExpenses {
