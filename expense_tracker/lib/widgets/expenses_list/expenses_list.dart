@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_item.dart';
 import 'package:flutter/material.dart';
 
@@ -14,19 +15,22 @@ class ExpensesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (context, index) => Dismissible(
         key: ValueKey(expenses[index]),
         background: Container(
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.75),
-          margin: EdgeInsets.symmetric(
-            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
-          ),
-        child: const Align(
+          color: isDarkMode
+              ? Theme.of(context).colorScheme.secondary.withOpacity(0.75)
+              : Theme.of(context).colorScheme.primary.withOpacity(0.75),
+          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          child: const Align(
             alignment: Alignment.centerRight,
             child: Padding(
-              padding: EdgeInsets.only(right: 5.0),
+              padding: EdgeInsets.only(right: 15.0),
               child: Icon(
                 Icons.delete,
                 color: Colors.white,
@@ -34,6 +38,7 @@ class ExpensesList extends StatelessWidget {
             ),
           ),
         ),
+        direction: DismissDirection.endToStart,
         onDismissed: (direction) {
           onRemoveExpense(expenses[index]);
         },
