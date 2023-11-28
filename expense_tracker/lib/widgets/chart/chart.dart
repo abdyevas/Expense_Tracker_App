@@ -9,13 +9,12 @@ class Chart extends StatelessWidget {
   final List<Expense> expenses;
 
   List<ExpenseBucket> get buckets {
-    return [
-      ExpenseBucket.forCategory(expenses, Categoty.food),
-      ExpenseBucket.forCategory(expenses, Categoty.leisure),
-      ExpenseBucket.forCategory(expenses, Categoty.travel),
-      ExpenseBucket.forCategory(expenses, Categoty.work),
-      ExpenseBucket.forCategory(expenses, Categoty.home),
-    ];
+    List<Categoty> categoriesWithExpenses =
+        expenses.map((expense) => expense.categoty).toSet().toList();
+
+    return categoriesWithExpenses.map((category) {
+      return ExpenseBucket.forCategory(expenses, category);
+    }).toList();
   }
 
   double get maxTotalExpense {
@@ -41,7 +40,7 @@ class Chart extends StatelessWidget {
         horizontal: 8,
       ),
       width: double.infinity,
-      height: 180,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         gradient: LinearGradient(
@@ -55,11 +54,32 @@ class Chart extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Row(
+            children: buckets
+                .map(
+                  (bucket) => Expanded(
+                    child: Center(
+                      child: Text(
+                        '\$${bucket.totalExpenses.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: isDarkMode
+                              ? Theme.of(context).colorScheme.secondary
+                              : Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+          const SizedBox(height: 6.0),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                for (final bucket in buckets) 
+                for (final bucket in buckets)
                   ChartBar(
                     fill: bucket.totalExpenses == 0
                         ? 0
