@@ -27,6 +27,22 @@ class ExpensesList extends StatelessWidget {
               : Theme.of(context).colorScheme.primary.withOpacity(0.75),
           margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
           child: const Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 15.0),
+              child: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        secondaryBackground: Container(
+          color: isDarkMode
+              ? Theme.of(context).colorScheme.secondary.withOpacity(0.75)
+              : Theme.of(context).colorScheme.primary.withOpacity(0.75),
+          margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          child: const Align(
             alignment: Alignment.centerRight,
             child: Padding(
               padding: EdgeInsets.only(right: 15.0),
@@ -37,7 +53,6 @@ class ExpensesList extends StatelessWidget {
             ),
           ),
         ),
-        direction: DismissDirection.endToStart,
         onDismissed: (direction) {
           onRemoveExpense(expenses[index]);
         },

@@ -74,7 +74,7 @@ class Chart extends StatelessWidget {
                 )
                 .toList(),
           ),
-          const SizedBox(height: 6.0),
+          const SizedBox(height: 8.0),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
