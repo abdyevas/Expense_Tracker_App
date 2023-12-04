@@ -31,7 +31,7 @@ class ExpensesList extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 15.0),
               child: Icon(
-                Icons.edit,
+                Icons.delete,
                 color: Colors.white,
               ),
             ),
