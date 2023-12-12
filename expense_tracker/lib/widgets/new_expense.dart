@@ -85,34 +85,8 @@ class _NewExpenseState extends State<NewExpense> {
                   EdgeInsets.fromLTRB(16.0, 16.0, 16.0, keyboardSpace + 16.0),
               child: Column(
                 children: [
-                  if (width >= 600)
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _titleControler,
-                            maxLength: 50,
-                            decoration: const InputDecoration(
-                              label: Text('Title'),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 25.0,
-                        ),
-                        Expanded(
-                          child: TextField(
-                            controller: _amountControler,
-                            keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
-                              prefixText: '\$',
-                              label: Text('Amount'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                  if (isWideScreen)
+                    _buildWideScreenWidgets()
                   else
                     TextField(
                       controller: _titleControler,
@@ -268,6 +242,36 @@ class _NewExpenseState extends State<NewExpense> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildWideScreenWidgets() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: TextField(
+            controller: _titleControler,
+            maxLength: 50,
+            decoration: const InputDecoration(
+              label: Text('Title'),
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 25.0,
+        ),
+        Expanded(
+          child: TextField(
+            controller: _amountControler,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              prefixText: '\$',
+              label: Text('Amount'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
