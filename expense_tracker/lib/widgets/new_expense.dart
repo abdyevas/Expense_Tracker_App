@@ -43,12 +43,9 @@ class _NewExpenseState extends State<NewExpense> {
   }
 
   void _showDialog() {
-    if (Platform.isIOS) {
-      showMyCupertinoDialog(context);
-    } else {
-      showMyDialog(context);
-    }
+    Platform.isIOS ? showMyCupertinoDialog(context) : showMyDialog(context);
   }
+  
 
   void _submitExpenseData() {
     final enteredAmount = double.tryParse(_amountControler.text);
@@ -59,6 +56,7 @@ class _NewExpenseState extends State<NewExpense> {
       _showDialog();
       return;
     }
+
     widget.onAddExpense(
       Expense(
         title: _titleControler.text,
@@ -67,12 +65,15 @@ class _NewExpenseState extends State<NewExpense> {
         categoty: _selectedCategory,
       ),
     );
+
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isWideScreen = MediaQuery.of(context).size.width >= 600;
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    
     return LayoutBuilder(
       builder: (ctx, constraints) {
         final width = constraints.maxWidth;

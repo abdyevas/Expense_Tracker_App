@@ -21,6 +21,18 @@ class _ExpensesState extends State<Expenses> {
       date: DateTime.now(),
       categoty: Categoty.leisure,
     ),
+    Expense(
+      title: 'Example expense 2',
+      amount: 8,
+      date: DateTime.now(),
+      categoty: Categoty.food,
+    ),
+    Expense(
+      title: 'Example expense 3',
+      amount: 11.99,
+      date: DateTime.now(),
+      categoty: Categoty.travel,
+    ),
   ];
 
   void _openAddExpense() {
